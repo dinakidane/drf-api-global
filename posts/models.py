@@ -34,6 +34,10 @@ class Post(models.Model):
         upload_to='images/', default='../default_profile_ky9c7z', blank=True  # Optional image with a default fallback
     )
 
+    image_filter = models.CharField(
+        max_length=32, choices=image_filter_choices_list, default='normal'
+    )
+
     class Meta:
         ordering = ['-created_at']  # Order posts by the latest created first
 

@@ -13,7 +13,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)  # The title of the post
     content = models.TextField(blank=True)  # Post content, optional
     image = models.ImageField(
-        upload_to='images/', default='../default_post_rgq6aq', blank=True  # Optional image with a default fallback
+        upload_to='images/', default='../default_profile_ky9c7z', blank=True  # Optional image with a default fallback
     )
 
     class Meta:

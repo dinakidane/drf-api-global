@@ -31,8 +31,6 @@ class PostSerializer(serializers.ModelSerializer):
         self.check_image_constraints(value)
         return value
 
-
-
     def get_is_owner(self, obj):
         """
         Check if the requesting user is the owner of the post.
@@ -45,6 +43,6 @@ class PostSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
-            'title', 'content', 'image', 'image_filter'
+            'title', 'content', 'image', 'image_filter',
         ]
 

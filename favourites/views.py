@@ -23,6 +23,11 @@ class FavouriteListCreateView(generics.ListCreateAPIView):
         if post.owner == request.user:
             return Response({"error": "You cannot like your own post."}, status=status.HTTP_403_FORBIDDEN)
 
+        # Check if the favourite already exists
+        existing_favourite = Favourite.objects.filter(user=request.user, post=post).first()
+        if existing_favourite:
+            return Response({"message": "You have already liked this post."}, status=status.HTTP_200_OK)
+
         return super().create(request, *args, **kwargs)
 
 class FavouriteDetailView(generics.DestroyAPIView):

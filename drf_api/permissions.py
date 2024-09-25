@@ -9,4 +9,4 @@ class IsProfileOwnerOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         # Write permissions are only allowed to the owner of the post
-        return obj.owner == request.user  # Compare `obj.owner` with `request.user`
+        return getattr(obj, 'owner', None) == request.user

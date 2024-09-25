@@ -11,7 +11,7 @@ class Post(models.Model):
     image_filter_choices_list = [
         ('clarendon', 'Clarendon'), 
         ('gingham', 'Gingham'),
-        ('moon', 'Moon'), 
+        ('normal', 'Normal'), 
         ('reyes', 'Reyes'),
         ('perpetua', 'Perpetua'), 
         ('amaro', 'Amaro'),

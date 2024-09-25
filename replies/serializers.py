@@ -4,13 +4,15 @@ from posts.models import Post
 from profiles.models import UserProfile
 
 class ReplySerializer(serializers.ModelSerializer):
-    # Allow selection of Post by its primary key (id)
     post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())
+    profile_id = serializers.ReadOnlyField(source='owner.userprofile.id')  # Add profile ID
+    profile_image = serializers.ImageField(source='owner.userprofile.profile_image', allow_null=True)  # Add profile image
+    owner = serializers.ReadOnlyField(source='owner.username')  # Add owner field
 
     class Meta:
         model = Reply
-        fields = ['id', 'content', 'created_at', 'updated_at', 'owner', 'post']
-
+        fields = ['id', 'content', 'created_at', 'updated_at', 'owner', 'post', 'profile_id', 'profile_image']
+        
 class ReplyDetailSerializer(ReplySerializer):
     """
     Serializer for Reply model used in detail view.

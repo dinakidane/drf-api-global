@@ -26,6 +26,11 @@ class PostSerializer(serializers.ModelSerializer):
 
         return image_file
 
+    def validate_image(self, value):
+        """Validate the image against the defined constraints."""
+        self.check_image_constraints(value)
+        return value
+
 
 
     def get_is_owner(self, obj):

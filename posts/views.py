@@ -18,10 +18,14 @@ class PostListView(APIView):
 
     def post(self, request):
         """Create a new post."""
+        if not request.user.is_authenticated:
+            return Response({'error': 'You must be logged in to create a post.'}, status=status.HTTP_403_FORBIDDEN)
+        
         new_post_serializer = PostSerializer(data=request.data, context={'request': request})
         if new_post_serializer.is_valid():
             new_post_serializer.save(owner=request.user)
             return Response(new_post_serializer.data, status=status.HTTP_201_CREATED)
+        
         return Response(new_post_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PostDetailView(APIView):

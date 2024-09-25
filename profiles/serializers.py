@@ -11,7 +11,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         Check if the request's user is the owner of the profile.
         """
         request = self.context.get('request')  # Safely get the request from the context
-        return request.user == obj.user  # Compare the requesting user with the profile owner
+        return request.user == obj.owner  # Compare the requesting user with the profile owner
 
     class Meta:
         model = UserProfile

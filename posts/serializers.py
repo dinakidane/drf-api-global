@@ -7,6 +7,8 @@ class PostSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()  # Custom method field to check if the request's user is the owner
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')  # Read-only field for the owner's profile ID
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')  # Read-only field for the profile image URL
+    bookmarks_count = serializers.SerializerMethodField()
+
 
 
     def check_image_constraints(self, image_file):
@@ -43,6 +45,9 @@ class PostSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
-            'title', 'content', 'image', 'image_filter',
+            'title', 'content', 'image', 'image_filter','bookmarks_count',
         ]
+
+    def get_bookmarks_count(self, obj):
+        return obj.bookmarked_by.count()
 

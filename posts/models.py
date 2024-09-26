@@ -37,6 +37,7 @@ class Post(models.Model):
     image_filter = models.CharField(
         max_length=32, choices=image_filter_choices_list, default='normal'
     )
+    bookmarked_by = models.ManyToManyField(User, through='bookmarks.Bookmark', related_name='bookmarked_posts')
 
     class Meta:
         ordering = ['-created_at']  # Order posts by the latest created first
